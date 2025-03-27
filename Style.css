@@ -49,3 +49,25 @@ body{
     height: auto; /* Maintains the aspect ratio */
     border: 2px solid var(--primary-color); /* Optional: Adds a border to the image */
 }
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.image-container {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 100px); /* Adjust height based on header/navbar height */
+    overflow: hidden;
+}
+
+.image-container img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: calc(100vh - 10px); /* Adjust height to extend the header */
+    object-fit: cover;
+}
