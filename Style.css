@@ -9,18 +9,43 @@ body{
     color: var(--text-color);
     font-family: Georgia, 'Times New Roman', Times, serif;
 }
-.header{
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    text-align: left;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 1.5em;
+
+.header {
+    text-align: center;
+    font-family: Georgia, serif;
+    color: black;
+    background-color: red;
+    padding: 10px;
+    margin-bottom: 10px;
+    font-size: 2em; /* Increased header text size */
 }
 
 .navbar {
-    text-align: right;
-    background-color: var(--primary-color);
-    color: var(--text-color);
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 1.5em;
+    display: flex;
+    justify-content: center;
+    background-color: red;
+    padding: 10px;
+}
+
+.navbar a {
+    text-decoration: none;
+    color: black;
+    margin: 0 15px;
+    transition: background-color 0.3s, color 0.3s;
+    font-size: 0.5em; /* Reduced navbar text size */
+}
+
+.navbar a:hover {
+    color: white;
+}
+
+.image-container {
+    text-align: center; /* Centers the image horizontally */
+    margin: 20px 0; /* Adds some spacing around the image */
+}
+
+.image-container img {
+    max-width: 100%; /* Ensures the image is responsive */
+    height: auto; /* Maintains the aspect ratio */
+    border: 2px solid var(--primary-color); /* Optional: Adds a border to the image */
 }
