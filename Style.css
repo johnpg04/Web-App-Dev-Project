@@ -182,3 +182,61 @@ form button:hover {
     border-radius: 5px;
     margin-top: 5px;
 }
+
+.room-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 4 columns */
+    gap: 10px; /* Space between buttons */
+    margin: 20px auto; /* Center the grid horizontally */
+    width: 50%; /* Adjust width as needed */
+}
+
+.room-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%; /* Full width of the grid cell */
+    height: 100px; /* Fixed height */
+    font-size: 1.2em;
+    font-weight: bold;
+    border: 2px solid black;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative; /* For tooltip positioning */
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.room-button.available {
+    background-color: rgb(255, 0, 0);
+    color: rgb(0, 0, 0);
+}
+
+.room-button.reserved {
+    background-color: red;
+    color: rgb(255, 255, 255);
+    cursor: not-allowed;
+}
+
+/* Tooltip styling */
+.room-button:hover::after {
+    content: attr(title); /* Use the title attribute for the tooltip */
+    position: absolute;
+    bottom: 110%; /* Position above the button */
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: rgba(255, 254, 254, 0);
+    color: white;
+    padding: 5px 10px;
+    border-radius: 5px;
+    white-space: nowrap;
+    font-size: 0.9em;
+    z-index: 10;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.3s;
+}
+
+.room-button::after {
+    opacity: 0;
+    visibility: hidden;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UH at Sugar Land</title>
+    <link rel="stylesheet" href="Style.css">
+
+</head>
+    <!--Fonts: Georgia, Serif;-->
+    <!--Colors: red,black,silver-->
+<body>
+    <header class="header">Welcome to the University of Houston
+        <div class="navbar">
+            <a href="Home.html">Home</a>
+            <a href="About.html">About</a>
+            <a href="FAQ.html">FAQ</a>
+            <a href="Contact.html">Contact</a>
+        </div>
+    </header>
+
+    <div id="room-availability" class="room-grid"></div>
+
+    <form id="reserve-room-form">
+        <label for="room-number">Select Room:</label>
+        <select id="room-number" name="room-number">
+            <option value="1">Room 1</option>
+            <option value="2">Room 2</option>
+            <option value="3">Room 3</option>
+            <option value="4">Room 4</option>
+            <option value="5">Room 5</option>
+            <option value="6">Room 6</option>
+            <option value="7">Room 7</option>
+            <option value="8">Room 8</option>
+        </select>
+        <br>
+        <label for="reservation-date">Reservation Date:</label>
+        <input type="date" id="reservation-date" name="reservation-date" required>
+        <br>
+        <label for="reservation-time">Reservation Start Time:</label>
+        <input type="time" id="reservation-time" name="reservation-time" required>
+        <br>
+        <label for="duration">Reservation Duration (hours):</label>
+        <select id="duration" name="duration">
+            <option value="1">1 Hour</option>
+            <option value="2">2 Hours</option>
+            <option value="3">3 Hours</option>
+            <option value="4">4 Hours</option>
+        </select>
+        <br>
+        <button type="submit">Reserve</button>
+    </form>
+
+    <script src="myJavaScript.js"></script>    
+</body>
+</html>

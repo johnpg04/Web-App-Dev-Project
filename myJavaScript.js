@@ -57,3 +57,106 @@ function handleSubmit(event) {
             });
         });
     });
+
+    const reservations = []; // Array to store reservations
+    const totalRooms = 8; // Total number of rooms
+    
+    // Function to update the room availability grid
+    function updateRoomAvailability() {
+        const roomGrid = document.getElementById('room-availability');
+        if (!roomGrid) {
+            console.error('Room grid container not found!');
+            return;
+        }
+    
+        roomGrid.innerHTML = ''; // Clear the grid
+    
+        const currentTime = new Date();
+    
+        for (let i = 1; i <= totalRooms; i++) {
+            const roomReservations = reservations.filter(
+                (res) => res.roomNumber === i && new Date(res.endTime) > currentTime
+            );
+    
+            const isAvailable = roomReservations.length === 0;
+    
+            // Create a button for each room
+            const roomButton = document.createElement('button');
+            roomButton.classList.add('room-button');
+            roomButton.textContent = `Room ${i}`;
+            roomButton.classList.add(isAvailable ? 'available' : 'reserved');
+    
+            // Add a tooltip for reserved rooms
+            if (!isAvailable) {
+                const reservation = roomReservations[0];
+                roomButton.title = `Reserved until ${new Date(reservation.endTime).toLocaleString()}`;
+            }
+    
+            roomGrid.appendChild(roomButton);
+        }
+    }
+    
+    // Event listener for the reservation form submission
+    document.getElementById('reserve-room-form').addEventListener('submit', function (event) {
+        event.preventDefault();
+    
+        const roomNumber = parseInt(document.getElementById('room-number').value, 10);
+        const reservationDate = document.getElementById('reservation-date').value;
+        const reservationTime = document.getElementById('reservation-time').value;
+        const duration = parseInt(document.getElementById('duration').value, 10);
+    
+        const startTime = new Date(`${reservationDate}T${reservationTime}`);
+        const endTime = new Date(startTime.getTime() + duration * 60 * 60 * 1000);
+    
+        // Check if the room is available for the selected time
+        const overlappingReservation = reservations.find(
+            (res) =>
+                res.roomNumber === roomNumber &&
+                ((startTime >= new Date(res.startTime) && startTime < new Date(res.endTime)) ||
+                    (endTime > new Date(res.startTime) && endTime <= new Date(res.endTime)))
+        );
+    
+        if (overlappingReservation) {
+            alert(`Room ${roomNumber} is already reserved during the selected time.`);
+        } else {
+            reservations.push({ roomNumber, startTime, endTime });
+            updateRoomAvailability();
+            alert(`Room ${roomNumber} reserved from ${startTime.toLocaleString()} to ${endTime.toLocaleString()}.`);
+        }
+    });
+    
+    // Initialize the room availability display
+    document.addEventListener('DOMContentLoaded', () => {
+        updateRoomAvailability();
+    });
+
+    function updateRoomAvailability() {
+        const roomGrid = document.getElementById('room-availability');
+        roomGrid.innerHTML = ''; // Clear the grid
+    
+        const currentTime = new Date();
+    
+        for (let i = 1; i <= totalRooms; i++) {
+            const roomReservations = reservations.filter(
+                (res) => res.roomNumber === i && new Date(res.endTime) > currentTime
+            );
+    
+            const isAvailable = roomReservations.length === 0;
+    
+            // Create a button for each room
+            const roomButton = document.createElement('button');
+            roomButton.classList.add('room-button');
+            roomButton.textContent = `Room ${i}`;
+            roomButton.classList.add(isAvailable ? 'available' : 'reserved');
+    
+            // Add a tooltip for reserved rooms
+            if (!isAvailable) {
+                const reservation = roomReservations[0];
+                roomButton.title = `Reserved until ${new Date(reservation.endTime).toLocaleString()}`;
+            } else {
+                roomButton.title = 'Available';
+            }
+    
+            roomGrid.appendChild(roomButton);
+        }
+    }
