@@ -30,3 +30,30 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     });
 });
+
+
+function handleSubmit(event) {
+    event.preventDefault();
+    document.getElementById('responseMessage').textContent = 
+        "Thank you for reaching out to us. We have received your inquiry and will review it as soon as possible.";
+    document.getElementById('responseMessage').style.display = 'block';
+    event.target.reset();
+}
+
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const faqQuestions = document.querySelectorAll('.faq-question');
+
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const answer = question.nextElementSibling;
+
+                // Toggle the visibility of the answer
+                if (answer.style.display === 'block') {
+                    answer.style.display = 'none';
+                } else {
+                    answer.style.display = 'block';
+                }
+            });
+        });
+    });

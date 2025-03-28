@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UH at Sugar Land</title>
+    <link rel="stylesheet" href="Style.css">
+    <script src="myJavaScript.js"></script>
+</head>
+    <!--Fonts: Georgia, Serif;-->
+    <!--Colors: red,black,silver-->
+<body>
+    <header class="header">Welcome to the University of Houston
+        <div class="navbar">
+            <a href="Home.html">Home</a>
+            <a href="About.html">About</a>
+            <a href="Servies.html">Services</a>
+            <a href="FAQ.html">FAQ</a>
+        </div>
+    </header>
+    
+    <section class="contact-form">
+        <h2>Contact Us</h2>
+        <form id="contactForm" onsubmit="handleSubmit(event)">
+            <label for="email">School Email:</label>
+            <input type="email" id="email" name="email" required>
+            
+            <label for="classification">Classification:</label>
+            <select id="classification" name="classification" required>
+                <option value="" disabled selected>Select your classification</option>
+                <option value="staff">Staff</option>
+                <option value="student">Student</option>
+                <option value="professor">Professor</option>
+            </select>
+            
+            <label for="inquiry">Inquiry:</label>
+            <textarea id="inquiry" name="inquiry" rows="5" required></textarea>
+            
+            <button type="submit">Submit</button>
+        </form>
+        <p id="responseMessage" style="display:none; color: rgb(255, 255, 255);"></p>
+    </section>
+
+    <script>
+        function handleSubmit(event) {
+            event.preventDefault();
+            document.getElementById('responseMessage').textContent = 
+                "Thank you for reaching out to us. We have received your inquiry and will review it as soon as possible.";
+            document.getElementById('responseMessage').style.display = 'block';
+            event.target.reset();
+        }
+    </script>
+
+    
+
+</body>
+</html>
