@@ -271,7 +271,8 @@ body {
     padding: 15px;
     border-radius: 5px;
     width: 40%;
-    box-shadow: 2px 2px 10px rgba(255, 0, 0, 0.1);
+    height: 410px; /* Fixed height for the event box */
+    box-shadow: 2px 2px 10px rgba(255, 255, 255, 0.1);
     margin: 20px 0;
 }
 
@@ -295,7 +296,7 @@ body {
 }
 
 .event.right {
-    left: 50%;
+    left: 56%;
 }
 
 .event.right::before {
@@ -312,4 +313,10 @@ body {
     margin: 0;
     font-size: 1em;
     color: #ffffff;
+}
+.event img {
+    width: 100%; /* Makes the image take up the full width of the event */
+    height: auto; /* Maintains the aspect ratio */
+    border-radius: 5px; /* Matches the event's border radius */
+    margin-top: 40px; /* Adds some spacing between the text and the image */
 }
