@@ -13,7 +13,7 @@ body {
     flex-direction: column;
     align-items: center;
     margin: 0;
-    padding: 20px;
+    padding: 0;
 }
 
 .header {
@@ -259,19 +259,19 @@ form button:hover {
 }
 
 .event.left {
-    left: 0;
+    left: -45%
 }
 
 .event.left::before {
-    right: -60px;
+    right: -50px;
 }
 
 .event.right {
-    left: 50%;
+    left: 60%;
 }
 
 .event.right::before {
-    left: -30px;
+    left: -55px;
 }
 
 .event h3 {
@@ -293,7 +293,6 @@ form button:hover {
     margin-top: 40px;
 }
 
-
 .event {
     position: relative;
     background-color: #3d0000;
@@ -307,4 +306,9 @@ form button:hover {
     flex-direction: column;
     align-items: left;
     text-align: left;
+}
+
+.About-header {
+    text-align: center;
+    font-size: 2em;
 }
