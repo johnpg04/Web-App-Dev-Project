@@ -5,15 +5,16 @@ const path = require('path');
 const app = express();
 const PORT = 3000;
 
+// Middleware
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-app.use(express.static('front_end')); // Serve HTML and static files from public/
+app.use(express.static('back_end'));
 
-// In-memory storage: { 'roomNumber|date': [ { start, end } ] }
-const bookings = {};
+// In-memory bookings object
+const bookings = {}; // Example key: "1|2025-04-21"
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'front_end', 'services.html'));
+    res.sendFile(path.join(__dirname, 'back_end', 'services.html'));
 });
 
 app.post('/reserve', (req, res) => {
@@ -30,29 +31,36 @@ app.post('/reserve', (req, res) => {
     const startTime = new Date(`${date}T${time}`);
     const endTime = new Date(startTime.getTime() + duration * 60 * 60 * 1000);
 
+    // Initialize if no bookings yet
     if (!bookings[key]) bookings[key] = [];
 
-    // Check for overlaps
+    // Check for overlap
     const isOverlapping = bookings[key].some(booking => {
-        return (startTime < booking.end && endTime > booking.start);
+        return startTime < booking.end && endTime > booking.start;
     });
 
     if (isOverlapping) {
         return res.status(409).json({
             status: 'declined',
-            message: `Room ${room} is not available from ${time} for ${duration} hour(s).`
+            message: `Room ${room} is NOT available on ${date} at ${time}.`
         });
     }
 
-    // Add new booking
+    // Save booking
     bookings[key].push({ start: startTime, end: endTime });
 
     return res.status(200).json({
         status: 'confirmed',
-        message: `Room ${room} has been reserved on ${date} from ${time} for ${duration} hour(s).`
+        message: `✅ Room ${room} booked on ${date} at ${time} for ${duration} hour(s).`,
+        bookings: bookings[key]
     });
 });
 
 app.listen(PORT, () => {
-    console.log(`Server is running at http://localhost:${PORT}`);
+    console.log(`🚀 Server running at http://localhost:${PORT}`);
 });
+
+//npm init -y
+//npm install express body-parser
+//node server.js
+
